@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>MySelf</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <!-- modernizr enables HTML5 elements and feature detects -->
+  <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+    <style>
+    canvas{
+        border: 2px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+  <div id="main">
+    <header>
+      <div id="logo">
+        <div id="logo_text">
+           <h1><a href="index.html">IT<span class="logo_colour">_Major</span></a></h1>
+          <h2>Computer Science. AI/Machine Learning/NLP</h2>
+        </div>
+      </div>
+      <nav>
+        <ul class="sf-menu" id="nav">
+          <li><a href="index.html">About Me</a></li>
+          <li><a href="NLP.html">NLP</a></li>
+          <li class="selected"><a href="game.html">게임1</a></li>
+          <li><a href="game2.html">게임2</a></li>
+          <li><a href="game3.html">게임3</a></li>
+          <li><a href="contact.html">연락처</a></li>
+        </ul>
+      </nav>
+    </header>
+    <h2>Snake Game</h2>
+      <p><b>재미있게 시간을 보내세요^^</b></p>
+    <canvas id="gameCanvas" width="400" height="400"></canvas> 
+      
+      <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let snake = [{x: 10, y: 10}];
+        let food = {x: Math.floor(Math.random() * 40) * 10, y: Math.floor(Math.random() * 40) * 10};
+        let dx = 10;
+        let dy = 0;
+
+        function drawSnake() {
+            ctx.fillStyle = "green";
+            snake.forEach(segment => {
+                ctx.fillRect(segment.x, segment.y, 10, 10);
+            });
+        }
+
+        function drawFood() {
+            ctx.fillStyle = "red";
+            ctx.fillRect(food.x, food.y, 10, 10);
+        }
+
+        function moveSnake() {
+            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+            snake.unshift(head);
+            if (head.x === food.x && head.y === food.y) {
+                food = {x: Math.floor(Math.random() * 40) * 10, y: Math.floor(Math.random() * 40) * 10};
+            } else {
+                snake.pop();
+            }
+        }
+
+        function checkCollision() {
+            if (snake[0].x < 0 || snake[0].x >= 400 || snake[0].y < 0 || snake[0].y >= 400) {
+                clearInterval(gameInterval);
+                alert("Game over! You hit the wall!");
+            }
+
+            for (let i = 1; i < snake.length; i++) {
+                if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+                    clearInterval(gameInterval);
+                    alert("Game over! You ran into yourself!");
+                }
+            }
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawSnake();
+            drawFood();
+            moveSnake();
+            checkCollision();
+        }
+
+        document.addEventListener("keydown", (event) => {
+            switch(event.keyCode) {
+                case 37: // Left arrow key
+                    if (dx !== 10) {
+                        dx = -10;
+                        dy = 0;
+                    }
+                    break;
+                case 38: // Up arrow key
+                    if (dy !== 10) {
+                        dx = 0;
+                        dy = -10;
+                    }
+                    break;
+                case 39: // Right arrow key
+                    if (dx !== -10) {
+                        dx = 10;
+                        dy = 0;
+                    }
+                    break;
+                case 40: // Down arrow key
+                    if (dy !== -10) {
+                        dx = 0;
+                        dy = 10;
+                    }
+                    break;
+            }
+        });
+
+        const gameInterval = setInterval(gameLoop, 100);
+    </script>
+      
+
+    <footer>
+      
+    </footer>
+  </div>
+  <!-- javascript at the bottom for fast page loading -->
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.easing-sooper.js"></script>
+  <script type="text/javascript" src="js/jquery.sooperfish.js"></script>
+  <script type="text/javascript" src="js/image_fade.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('ul.sf-menu').sooperfish();
+    });
+  </script>
+</body>
+</html>

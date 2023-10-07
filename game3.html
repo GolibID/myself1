@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>MySelf</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <!-- modernizr enables HTML5 elements and feature detects -->
+  <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+    <style>
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin: 5px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+  <div id="main">
+    <header>
+      <div id="logo">
+        <div id="logo_text">
+           <h1><a href="index.html">IT<span class="logo_colour">_Major</span></a></h1>
+          <h2>Computer Science. AI/Machine Learning/NLP</h2>
+        </div>
+      </div>
+      <nav>
+        <ul class="sf-menu" id="nav">
+          <li><a href="index.html">About Me</a></li>
+          <li><a href="NLP.html">NLP</a></li>
+          <li><a href="game.html">게임1</a></li>
+          <li><a href="game2.html">게임2</a></li>
+          <li class="selected"><a href="game3.html">게임3</a></li>
+          <li><a href="contact.html">연락처</a></li>
+        </ul>
+      </nav>
+    </header>
+     <h2>Memory Game</h2>
+      <p><b>이 메모리 게임에서는 기호 쌍을 일치시켜야 합니다. 카드를 클릭하시면 카드가 선택되지만 안 보입니다. 그냥 같은 기호 쌍을 일치하고 가시면 됩니다. 모든 두 개의 일치한 기호들을 찾으시면 이깁니다. </b></p>
+    <div id="gameBoard"></div>
+    <button onclick="resetGame()">Reset</button>
+       <script>
+        const symbols = ['🌟', '🍎', '🍉', '🍕', '🎈', '🚀', '🎁', '🌈'];
+        let cards = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function createCard(symbol, index) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.index = index;
+            card.textContent = symbol;
+            card.addEventListener('click', flipCard);
+            return card;
+        }
+
+        function renderBoard() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.innerHTML = '';
+            cards.forEach((symbol, index) => {
+                const card = createCard(symbol, index);
+                gameBoard.appendChild(card);
+            });
+        }
+
+        function flipCard() {
+            if (flippedCards.length < 2) {
+                const index = this.dataset.index;
+                const card = cards[index];
+                this.textContent = card;
+                this.style.pointerEvents = 'none';
+                flippedCards.push({index, card});
+
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 1000);
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+
+            if (card1.card === card2.card) {
+                matchedPairs++;
+                if (matchedPairs === symbols.length) {
+                    alert('Congratulations! You won!');
+                }
+            } else {
+                const element1 = document.querySelector(`[data-index="${card1.index}"]`);
+                const element2 = document.querySelector(`[data-index="${card2.index}"]`);
+                element1.textContent = '';
+                element2.textContent = '';
+                element1.style.pointerEvents = 'auto';
+                element2.style.pointerEvents = 'auto';
+            }
+
+            flippedCards = [];
+        }
+
+        function resetGame() {
+            matchedPairs = 0;
+            flippedCards = [];
+            cards = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+            renderBoard();
+        }
+
+        renderBoard();
+    </script>
+      
+      
+    <footer>
+      
+    </footer>
+  </div>
+  <!-- javascript at the bottom for fast page loading -->
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.easing-sooper.js"></script>
+  <script type="text/javascript" src="js/jquery.sooperfish.js"></script>
+  <script type="text/javascript" src="js/image_fade.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('ul.sf-menu').sooperfish();
+    });
+  </script>
+</body>
+</html>

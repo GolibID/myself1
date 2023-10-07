@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>MySelf</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <!-- modernizr enables HTML5 elements and feature detects -->
+  <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+    <style>
+        .gameContainer {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 10px;
+        }
+        .hole {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+  <div id="main">
+    <header>
+      <div id="logo">
+        <div id="logo_text">
+           <h1><a href="index.html">IT<span class="logo_colour">_Major</span></a></h1>
+          <h2>Computer Science. AI/Machine Learning/NLP</h2>
+        </div>
+      </div>
+      <nav>
+        <ul class="sf-menu" id="nav">
+          <li><a href="index.html">About Me</a></li>
+          <li><a href="NLP.html">NLP</a></li>
+          <li><a href="game.html">게임1</a></li>
+          <li class="selected"><a href="game2.html">게임2</a></li>
+          <li><a href="game3.html">게임3</a></li>
+          <li><a href="contact.html">연락처</a></li>
+        </ul>
+      </nav>
+    </header>
+    <h2>Whack-a-Mole Game</h2>
+      <p><b>좀 빨리해야 합니다.^^ speed는 500millisec. ㅋㅋㅋ</b></p>
+    <div class="gameContainer" id="gameContainer"></div>
+    <p>Score: <span id="score">0</span></p>
+      
+    <script>
+        const gameContainer = document.getElementById('gameContainer');
+        const scoreElement = document.getElementById('score');
+        let score = 0;
+
+        function createHole(index) {
+            const hole = document.createElement('div');
+            hole.classList.add('hole');
+            hole.dataset.index = index;
+            hole.textContent = '';
+            hole.addEventListener('click', whack);
+            return hole;
+        }
+
+        function getRandomMoleIndex() {
+            return Math.floor(Math.random() * 9);
+        }
+
+        function whack() {
+            if (this.textContent === '🐭') {
+                score++;
+            }
+            updateScore();
+        }
+
+        function updateScore() {
+            scoreElement.textContent = score;
+        }
+
+        function startGame() {
+            setInterval(() => {
+                const holes = document.querySelectorAll('.hole');
+                holes.forEach(hole => hole.textContent = '');
+                const moleIndex = getRandomMoleIndex();
+                holes[moleIndex].textContent = '🐭';
+            }, 500);
+        }
+
+        for (let i = 0; i < 9; i++) {
+            const hole = createHole(i);
+            gameContainer.appendChild(hole);
+        }
+
+        startGame();
+    </script>  
+      
+      
+      
+
+    <footer>
+      
+    </footer>
+  </div>
+  <!-- javascript at the bottom for fast page loading -->
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.easing-sooper.js"></script>
+  <script type="text/javascript" src="js/jquery.sooperfish.js"></script>
+  <script type="text/javascript" src="js/image_fade.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('ul.sf-menu').sooperfish();
+    });
+  </script>
+</body>
+</html>

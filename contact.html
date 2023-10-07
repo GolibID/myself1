@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>MySelf</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <!-- modernizr enables HTML5 elements and feature detects -->
+  <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <header>
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">IT<span class="logo_colour">_Major</span></a></h1>
+          <h2>Computer Science. AI/Machine Learning/NLP</h2>
+        </div>
+      </div>
+      <nav>
+        <ul class="sf-menu" id="nav">
+          <li><a href="index.html">About Me</a></li>
+          <li><a href="NLP.html">NLP</a></li>
+          <li><a href="game.html">게임1</a></li>
+          <li><a href="game2.html">게임2</a></li>
+          <li><a href="game3.html">게임3</a></li>
+          <li class="selected"><a href="contact.html">연락처</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div id="site_content">
+      <div id="sidebar_container">
+        <div id="gallery">
+          <ul class="images">
+            <li class="show"><img width="450" height="450" src="images/1.jpg" alt="photo_one" /></li>
+            <li><img width="450" height="450" src="images/2.jpg" alt="photo_two" /></li>
+            <li><img width="450" height="450" src="images/3.jpg" alt="photo_three" /></li>
+            <li><img width="450" height="450" src="images/4.jpg" alt="photo_four" /></li>
+            <li><img width="450" height="450" src="images/5.jpg" alt="photo_five" /></li>
+          </ul>
+        </div>
+      </div>
+      <div id="content">
+        <h1>Contact</h1>
+        <div id="blog_container">
+        <p>Mail: gsunatullaev@gmail.com<br> Phone: 010-7359-9666 <br>Telegram: @sunatullaev_golibjon </p>
+      </div>
+     </div>
+    </div>
+    <footer>
+      
+    </footer>
+  </div>
+  <!-- javascript at the bottom for fast page loading -->
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.easing-sooper.js"></script>
+  <script type="text/javascript" src="js/jquery.sooperfish.js"></script>
+  <script type="text/javascript" src="js/image_fade.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('ul.sf-menu').sooperfish();
+    });
+  </script>
+</body>
+</html>
